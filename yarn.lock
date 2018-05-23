@@ -2627,9 +2627,9 @@ handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
 
-hard-source-webpack-plugin@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/hard-source-webpack-plugin/-/hard-source-webpack-plugin-0.6.4.tgz#d80575d42c53e6af6dadc92271577a61cda20b12"
+hard-source-webpack-plugin@^0.6.9:
+  version "0.6.9"
+  resolved "https://registry.yarnpkg.com/hard-source-webpack-plugin/-/hard-source-webpack-plugin-0.6.9.tgz#b23b3cd3a3c661b6fce2925d928691055f950e7f"
   dependencies:
     lodash "^4.15.0"
     mkdirp "^0.5.1"
