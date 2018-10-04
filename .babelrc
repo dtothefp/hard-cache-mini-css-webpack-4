@@ -8,7 +8,11 @@
     "react"
   ],
   "plugins": [
-    "css-modules-transform",
+    [
+      "css-modules-transform", {
+        "generateScopedName": "[path][name]__[local]--[hash:base64:5]"
+      }
+    ],
     "react-hot-loader/babel",
     "react-loadable/babel",
     "dynamic-import-node",

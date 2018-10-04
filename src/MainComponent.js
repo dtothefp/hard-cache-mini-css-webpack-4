@@ -4,7 +4,7 @@ import ComponentA from './ComponentA';
 import ComponentB from './ComponentB';
 
 const App = () => (
-  <div>
+  <div className="global-bg">
     <div>Hello World!</div>
     <ComponentA />
     <ComponentB />

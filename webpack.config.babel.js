@@ -64,7 +64,7 @@ export default {
       },
       {
         test: /\.css$/,
-        exclude: /(node_modules|ComponentA|ComponentA)/,
+        exclude: /(node_modules|ComponentA|ComponentB)/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
@@ -72,7 +72,7 @@ export default {
         ],
       },
       {
-        test: /(ComponentA|ComponentA).*\.css$/,
+        test: /(ComponentA|ComponentB).*\.css$/,
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -107,4 +107,5 @@ export default {
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.NamedModulesPlugin(),
   ],
+  devtool: false,
 }

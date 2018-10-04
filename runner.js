@@ -24,10 +24,9 @@ const html = async (webpackStats) => {
   const stats = require('./dist/react-loadable.json');
   let bundles = getBundles(stats, modules).filter(b => !!b);
 
-  console.log('*********', modules);
-
   if (!bundles.length) {
-    Object.keys(stats).reduce();
+    // add new bundle parsing logic here because
+    // hard-source plugin seems to alter the stats structure
   }
 
   console.log(bundles)
@@ -35,13 +34,15 @@ const html = async (webpackStats) => {
 
   return `<html>
     <head>
-      <link rel="stylesheet" href="">
-      <link rel="stylesheet" href="">
-      <link rel="stylesheet" href="">
+      <link rel="stylesheet" href="/main.css">
+      <link rel="stylesheet" data-href="ComponentA.css" href="/ComponentA.css">
+      <link rel="stylesheet" data-href="ComponentB.css" href="/ComponentB.css">
     </head>
     <body>
-      ${body}
-      <script src=""></script>
+      <div id="app">${body}</div>
+      <script type="text/javascript" src="/main.js"></script>
+      <script type="text/javascript" src="/ComponentA.js"></script>
+      <script type="text/javascript" src="/ComponentB.js"></script>
     </body>
   </html>`;
 };
