@@ -13,6 +13,8 @@
   "dependencies": {
     "autoprefixer": "^7.1.2",
     "babel-loader": "^7.1.4",
+    "babel-plugin-css-modules-transform": "^1.6.1",
+    "babel-plugin-dynamic-import-node": "^2.1.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -20,17 +22,22 @@
     "babel-register": "^6.26.0",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.10",
-    "hard-source-webpack-plugin": "^0.6.9",
+    "express": "^4.16.3",
+    "fs-extra": "^7.0.0",
+    "hard-source-webpack-plugin": "^0.12.0",
     "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.0",
+    "mini-css-extract-plugin": "^0.4.3",
     "postcss-loader": "2.1.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.1.1",
+    "react-loadable": "^5.5.0",
     "style-loader": "^0.20.3",
-    "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.12",
-    "webpack-dev-server": "^3.1.1"
+    "webpack": "4.19.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-dev-server": "^3.1.9",
+    "webpack-hot-middleware": "^2.24.2"
   }
 }

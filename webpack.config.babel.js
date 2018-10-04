@@ -4,10 +4,23 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebPackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
+import { ReactLoadablePlugin } from 'react-loadable/webpack';
 
 const {NODE_ENV} = process.env;
 const dest = `dist`;
 const base = path.join.bind(path, process.cwd());
+const babelrc = {
+  presets: [
+    'env',
+    'react'
+  ],
+  plugins: [
+    'react-hot-loader/babel',
+    'react-loadable/babel',
+    'syntax-dynamic-import',
+    'transform-object-rest-spread'
+  ]
+};
 
 export default {
   entry: {
@@ -21,9 +34,17 @@ export default {
   cache: true,
   optimization: {
     minimize: false,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        default: false,
+        vendors: false
+      }
+    }
   },
   mode: 'development',
   devServer: {
+    serverSideRender: true,
     contentBase: base(dest),
     host: 'localhost',
     port: 8080,
@@ -33,30 +54,41 @@ export default {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            ...babelrc,
+            babelrc: false,
+          }
+        }
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules|ComponentA|ComponentA)/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /(ComponentA|ComponentA).*\.css$/,
+        exclude: /node_modules/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+            }
+          },
           'postcss-loader',
         ],
       }
     ],
   },
   plugins: [
-    new CleanWebpackPlugin([dest]),
-    new HtmlWebPackPlugin({
-      template: base('src', 'index.html'),
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new webpack.NamedModulesPlugin(),
     new HardSourceWebpackPlugin({
       environmentHash: {
         root: process.cwd(),
@@ -64,5 +96,15 @@ export default {
         files: ['package-lock.json', 'yarn.lock'],
       },
     }),
+    new CleanWebpackPlugin([dest]),
+    new ReactLoadablePlugin({
+      filename: './dist/react-loadable.json',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.NamedModulesPlugin(),
   ],
 }
